@@ -37,3 +37,41 @@ export interface SubmitAvailabilityRequest {
 	rawText: string
 	slots: AvailabilitySlot[]
 }
+
+export type DayOfWeek = "monday" | "tuesday" | "wednesday" | "thursday" | "friday" | "saturday" | "sunday"
+
+export interface Role {
+	id: string
+	name: string
+	createdAt: string
+	_count?: {
+		shiftTemplateRoles: number
+	}
+}
+
+export interface RequiredRole {
+	roleId: string
+	roleName: string
+	minCount: number
+}
+
+export interface ShiftTemplate {
+	id: string
+	name: string
+	startTime: string
+	endTime: string
+	minStaff: number
+	days: DayOfWeek[]
+	requiredRoles: RequiredRole[]
+	createdAt: string
+	updatedAt: string
+}
+
+export interface ShiftTemplateInput {
+	name: string
+	startTime: string
+	endTime: string
+	minStaff: number
+	days: string[]
+	requiredRoles?: { roleId: string; minCount: number }[]
+}

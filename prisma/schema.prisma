@@ -44,3 +44,56 @@ enum ShiftType {
   AFTERNOON
   EVENING
 }
+
+enum DayOfWeek {
+  MONDAY
+  TUESDAY
+  WEDNESDAY
+  THURSDAY
+  FRIDAY
+  SATURDAY
+  SUNDAY
+}
+
+// Business-defined roles (e.g., Server, Host, Chef)
+model Role {
+  id                 String              @id @default(cuid())
+  name               String              @unique
+  createdAt          DateTime            @default(now())
+  shiftTemplateRoles ShiftTemplateRole[]
+}
+
+// Shift templates define concrete time slots
+model ShiftTemplate {
+  id        String                @id @default(cuid())
+  name      String
+  startTime String                // "08:00" (24hr format)
+  endTime   String                // "13:00"
+  minStaff  Int                   @default(1)
+  createdAt DateTime              @default(now())
+  updatedAt DateTime              @updatedAt
+  days      ShiftTemplateDay[]
+  roles     ShiftTemplateRole[]
+}
+
+// Which days each shift template runs
+model ShiftTemplateDay {
+  id              String        @id @default(cuid())
+  shiftTemplateId String
+  shiftTemplate   ShiftTemplate @relation(fields: [shiftTemplateId], references: [id], onDelete: Cascade)
+  day             DayOfWeek
+
+  @@unique([shiftTemplateId, day])
+}
+
+// Required roles per shift template (with count)
+model ShiftTemplateRole {
+  id              String        @id @default(cuid())
+  shiftTemplateId String
+  shiftTemplate   ShiftTemplate @relation(fields: [shiftTemplateId], references: [id], onDelete: Cascade)
+  roleId          String
+  role            Role          @relation(fields: [roleId], references: [id], onDelete: Cascade)
+  minCount        Int           @default(1)
+
+  @@unique([shiftTemplateId, roleId])
+}

@@ -146,6 +146,35 @@ exports.Prisma.AvailabilitySlotScalarFieldEnum = {
   wasEdited: 'wasEdited'
 };
 
+exports.Prisma.RoleScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.ShiftTemplateScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  startTime: 'startTime',
+  endTime: 'endTime',
+  minStaff: 'minStaff',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.ShiftTemplateDayScalarFieldEnum = {
+  id: 'id',
+  shiftTemplateId: 'shiftTemplateId',
+  day: 'day'
+};
+
+exports.Prisma.ShiftTemplateRoleScalarFieldEnum = {
+  id: 'id',
+  shiftTemplateId: 'shiftTemplateId',
+  roleId: 'roleId',
+  minCount: 'minCount'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -166,10 +195,24 @@ exports.ShiftType = exports.$Enums.ShiftType = {
   EVENING: 'EVENING'
 };
 
+exports.DayOfWeek = exports.$Enums.DayOfWeek = {
+  MONDAY: 'MONDAY',
+  TUESDAY: 'TUESDAY',
+  WEDNESDAY: 'WEDNESDAY',
+  THURSDAY: 'THURSDAY',
+  FRIDAY: 'FRIDAY',
+  SATURDAY: 'SATURDAY',
+  SUNDAY: 'SUNDAY'
+};
+
 exports.Prisma.ModelName = {
   Staff: 'Staff',
   AvailabilitySubmission: 'AvailabilitySubmission',
-  AvailabilitySlot: 'AvailabilitySlot'
+  AvailabilitySlot: 'AvailabilitySlot',
+  Role: 'Role',
+  ShiftTemplate: 'ShiftTemplate',
+  ShiftTemplateDay: 'ShiftTemplateDay',
+  ShiftTemplateRole: 'ShiftTemplateRole'
 };
 
 /**
